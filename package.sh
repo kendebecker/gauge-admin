@@ -1,2 +1,2 @@
 bundle exec rake assets:precompile
-warble executable war
+bundle exec rake war
