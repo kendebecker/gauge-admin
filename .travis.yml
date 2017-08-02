@@ -10,11 +10,11 @@ install:
 script:
   - RACK_ENV=production bundle exec rake war
 before_deploy:
-  - chmod +r activeadmin-demo.war
   - export RELEASE_WAR_FILE=$(ls activeadmin-demo.war)
   - echo "deploying $RELEASE_WAR_FILE to GitHub releases"
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: GeYGzycBHlIPWAcG+xt90fs/hqWxYVkpodm1aEL6Wkk4M6TXC7CQPtjOaBR2jQ/joIJ7xKYnYfcIqk1mg/97hnJTsDWQBG2PyFpCRrZVGRf85LZ1EQ4PVfkQFgcnYxhHmknJbQ1OWOMg4ylHsAl31lmTN2wmAyBrIizpBdlTilY=
   file: "${RELEASE_WAR_FILE}"
