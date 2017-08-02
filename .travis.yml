@@ -8,7 +8,7 @@ dist: trusty
 install:
   - bundle install
 script:
-  - bundle exec rake war
+  - RACK_ENV=production bundle exec rake war
 deploy:
   provider: releases
   api_key:
