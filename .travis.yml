@@ -6,9 +6,12 @@ rvm:
 sudo: required
 dist: trusty
 install:
-  - bundle install
+  - bundle install --path vendor/bundle
 script:
   - RACK_ENV=production bundle exec rake war
+  - nohup java -jar activeadmin-demo.war >/dev/null 2>&1 &
+  - sleep 30
+  - [[ `curl -o /dev/null --silent --head --write-out '%{http_code}\n' http://localhost:8080` == 200 ]] && echo "HTTP OK" || echo "HTTP failed" && exit -1
 before_deploy:
   - export RELEASE_WAR_FILE=$(ls activeadmin-demo.war)
   - echo "deploying $RELEASE_WAR_FILE to GitHub releases"
