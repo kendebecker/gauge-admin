@@ -5,6 +5,9 @@ rvm:
   - jruby
 sudo: required
 dist: trusty
+branches:
+  only:
+  - master
 install:
   - bundle install --path vendor/bundle
 script:
