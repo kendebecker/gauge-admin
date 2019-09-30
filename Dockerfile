@@ -13,14 +13,14 @@ WORKDIR $HOME
 
 # Install gems
 ADD Gemfile* $HOME/
-RUN gem install nokogiri
-RUN bundle install
+RUN gem install nokogiri -v 1.7.2
+RUN bundle install --without production
 
 # Add the app code
 ADD . $HOME
 
 # setup the db with seed data
-RUN bundle exec rake db:drop db:create db:migrate db:seed
+RUN bundle exec rake db:drop db:create db:migrate db:seed --trace
 
 # Default command
 CMD ["bundle", "exec", "rails", "s", "-p", "8000"]
